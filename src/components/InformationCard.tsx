@@ -17,7 +17,7 @@ const InformationCard = ({ value }: Props) => {
     { name: "Months of Netflix", value: value.netflix.toFixed(1) + " months" },
     { name: "Days to save up", value: value.daysToSave.toFixed(1) + " days" },
     {
-      name: "Yearly return (7%)",
+     name: "Yearly return (7%)",
       value: "€" + value.investYears.toFixed(2) + "/yr",
     },
   ];
