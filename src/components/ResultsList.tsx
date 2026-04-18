@@ -12,16 +12,14 @@ const ResultsList = () => {
   return (
     <div>
       <header>
-        <h3 className="text-md tracking-widest uppercase font-bold text-muted">
-          What it costs you
-        </h3>
+        <h3 className="text-md tracking-widest uppercase font-bold text-muted">What it costs you</h3>
       </header>
       <div className="flex flex-col gap-6">
         <div className="bg-card border rounded-xl flex p-6 flex flex-col gap-1">
           <TotalHours totalHours={value.totalHours} />
         </div>
         <div className="border rounded-xl bg-card">
-          <InformationCard value={value} />
+          <InformationCard />
         </div>
       </div>
     </div>

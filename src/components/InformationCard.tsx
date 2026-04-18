@@ -1,33 +1,17 @@
-type Props = {
-  value: {
-    monthly: number;
-    hourly: number;
-    cost: number;
-    totalHours: number;
-    percentage: number;
-    netflix: number;
-    daysToSave: number;
-    investYears: number;
-  };
-};
+import { useContext } from "react";
+import { LifeItemContext } from "../context/LifeItemContext";
 
-const InformationCard = ({ value }: Props) => {
-  const personalList = [
-    { name: "% of your month salary", value: value.percentage.toFixed(2) + "%" },
-    { name: "Months of Netflix", value: value.netflix.toFixed(1) + " months" },
-    { name: "Days to save up", value: value.daysToSave.toFixed(1) + " days" },
-    {
-      name: "Yearly return if invested (7%)",
-      value: "€" + value.investYears.toFixed(2) + "/yr",
-    },
-  ];
+const InformationCard = () => {
+  const context = useContext(LifeItemContext);
+  if (!context) return null;
+  const { lifeItem } = context;
 
   return (
     <div className="flex flex-col ">
-      {personalList.map((e) => (
+      {lifeItem.map((e) => (
         <div className="flex justify-between border-b last:border-b-0 px-5 py-4" key={e.name}>
           <span>{e.name}</span>
-          <span className="font-black">{e.value}</span>
+          <span className="font-black">{e.name.includes("%") ? `${e.cost.toFixed(2)}%` : e.name.includes("Days") ? `${e.cost.toFixed(1)} days` : `${e.cost.toFixed(2)}x`}</span>
         </div>
       ))}
     </div>

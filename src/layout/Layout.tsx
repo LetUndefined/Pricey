@@ -1,6 +1,7 @@
 import { Outlet } from "react-router";
 import Navigation from "../components/Navigation";
 import { RealCostProvider } from "../context/RealCostProvider";
+import { LifeItemProvider } from "../context/LifeItemProvider";
 
 const Layout = () => {
   return (
@@ -12,7 +13,9 @@ const Layout = () => {
         </header>
         <main className="flex-1 overflow-y-auto px-4 pb-20 min-h-0">
           <RealCostProvider>
-            <Outlet />
+            <LifeItemProvider>
+              <Outlet />
+            </LifeItemProvider>
           </RealCostProvider>
         </main>
         <Navigation />

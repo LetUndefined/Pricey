@@ -10,6 +10,7 @@ export const RealCostProvider = ({
     monthly: 0,
     hourly: 0,
     cost: 0,
+    calculatedCost: 0,
     totalHours: 0,
     percentage: 0,
     netflix: 0,
