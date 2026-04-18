@@ -14,7 +14,12 @@ const Navigation = () => {
       <ul className="flex justify-around h-16 items-center">
         {navItems.map(({ to, icon: Icon, label }) => (
           <li key={to}>
-            <NavLink to={to} className={({ isActive }) => `flex flex-col items-center gap-1 ${isActive ? "text-accent" : "text-subtle"}`}>
+            <NavLink
+              to={to}
+              className={({ isActive }) =>
+                `flex flex-col items-center gap-1 ${isActive ? "text-accent" : "text-subtle"}`
+              }
+            >
               <Icon size={20} />
               <span className="text-xs">{label}</span>
             </NavLink>

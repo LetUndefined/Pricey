@@ -1,6 +1,6 @@
 import { Outlet } from "react-router";
 import Navigation from "../components/Navigation";
-import { SalaryInputProvider } from "../context/SalaryInputProvider";
+import { RealCostProvider } from "../context/RealCostProvider";
 
 const Layout = () => {
   return (
@@ -10,9 +10,9 @@ const Layout = () => {
           <h3>PlaceholderName</h3>
         </header>
         <main className="px-4">
-          <SalaryInputProvider>
+          <RealCostProvider>
             <Outlet />
-          </SalaryInputProvider>
+          </RealCostProvider>
         </main>
         <Navigation />
       </div>
