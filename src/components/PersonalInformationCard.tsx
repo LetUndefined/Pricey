@@ -8,11 +8,11 @@ const PersonalInformationCard = () => {
   const addedItems = lifeItem.slice(3);
 
   return (
-    <div className="flex flex-wrap gap-2">
+    <div className="flex flex-wrap gap-2 justify-center border-[0.2rem] border-border p-4 bg-card rounded-lg">
       {addedItems.map((e) => (
-        <div className="flex flex-col border border-border rounded-lg items-center justify-center p-1 bg-card aspect-square w-[calc(33.333%-0.34rem)]" key={e.name}>
-          <span className="font-bold text-md truncate w-full text-center">{e.name}</span>
-          <span className="font-black text-2xl text-accent">{e.cost.toFixed(2)}x</span>
+        <div className="flex flex-col border border-border rounded-lg items-center justify-center px-4 bg-bg aspect-square min-w-[6rem] max-w-[6rem] " key={e.name}>
+          <span className="font-bold text-md truncate w-full text-center capitalize ">{e.name.toLowerCase()}</span>
+          <span className="font-black text-3xl text-accent">{e.cost.toFixed(0)}x</span>
         </div>
       ))}
     </div>

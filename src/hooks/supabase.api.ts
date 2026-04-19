@@ -11,10 +11,7 @@ async function getUserId() {
 export async function fetchLifeItems() {
   const userId = await getUserId();
   if (!userId) return [];
-  const { data } = await supabase
-    .from("life_items")
-    .select("id, name, original_price, icon")
-    .eq("profile_id", userId);
+  const { data } = await supabase.from("life_items").select("id, name, original_price, icon").eq("profile_id", userId);
   return data ?? [];
 }
 
@@ -42,11 +39,7 @@ export async function deleteLifeItem(id: string) {
 export async function fetchProfile() {
   const userId = await getUserId();
   if (!userId) return null;
-  const { data } = await supabase
-    .from("profiles")
-    .select("monthly, hourly")
-    .eq("id", userId)
-    .single();
+  const { data } = await supabase.from("profiles").select("monthly, hourly").eq("id", userId).single();
   return data;
 }
 

@@ -4,11 +4,7 @@ import { RealCostContext } from "./RealCostContext";
 import { fetchLifeItems, insertLifeItem } from "../hooks/supabase.api";
 import type { ItemUnit } from "../interface";
 
-export const LifeItemProvider = ({
-  children,
-}: {
-  children: React.ReactNode;
-}) => {
+export const LifeItemProvider = ({ children }: { children: React.ReactNode }) => {
   const value = useContext(RealCostContext);
   const v = value?.value;
 
@@ -38,11 +34,7 @@ export const LifeItemProvider = ({
     });
   }, []);
 
-  const addUserItem = async (item: {
-    name: string;
-    originalPrice: number;
-    icon: string;
-  }) => {
+  const addUserItem = async (item: { name: string; originalPrice: number; icon: string }) => {
     const id = await insertLifeItem({
       name: item.name,
       originalPrice: item.originalPrice,
@@ -93,9 +85,5 @@ export const LifeItemProvider = ({
     })),
   ];
 
-  return (
-    <LifeItemContext value={{ lifeItem, addUserItem, userItems }}>
-      {children}
-    </LifeItemContext>
-  );
+  return <LifeItemContext value={{ lifeItem, addUserItem, userItems, setUserItems }}>{children}</LifeItemContext>;
 };

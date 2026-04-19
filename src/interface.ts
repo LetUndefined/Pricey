@@ -21,7 +21,8 @@ export type ItemUnit = "%" | "days" | "€" | "x";
 export interface LifeItemContextType {
   lifeItem: { name: string; cost: number; unit: ItemUnit; icon: string }[];
   addUserItem: (item: { name: string; originalPrice: number; icon: string }) => Promise<void>;
-  userItems: { id?: string; name: string; cost: number; originalPrice: number; unit: string; icon: string }[];
+  userItems: { id?: string; name: string; cost: number; originalPrice: number; unit: "x"; icon: string }[];
+  setUserItems: React.Dispatch<React.SetStateAction<{ id?: string; name: string; cost: number; originalPrice: number; unit: "x"; icon: string }[]>>;
 }
 
 export interface LifeItem {
