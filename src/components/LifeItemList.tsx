@@ -5,13 +5,12 @@ import { ICON_MAP } from "../utils/icons";
 const LifeItemList = () => {
   const context = useContext(LifeItemContext);
   if (!context) return null;
-  const { lifeItem } = context;
-  const personalList = lifeItem.slice(3);
+  const { userItems } = context;
 
   return (
     <div>
       <div className="border border-border rounded-lg bg-card">
-        {personalList.map((e) => {
+        {userItems.map((e) => {
           const Icon = ICON_MAP[e.icon];
           return (
             <div
@@ -25,7 +24,7 @@ const LifeItemList = () => {
                 <h4 className="text-xl font-bold">{e.name}</h4>
               </div>
               <span className="font-black flex items-center text-xl">
-                €{e.cost}
+                €{e.originalPrice}
               </span>
             </div>
           );

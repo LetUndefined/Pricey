@@ -4,7 +4,7 @@ import { ICON_MAP, ICON_KEYS } from "../utils/icons";
 
 type Props = {
   onClose: () => void;
-  onAdd: (item: { name: string; cost: number; icon: string }) => void;
+  onAdd: (item: { name: string; originalPrice: number; icon: string }) => void;
 };
 
 const AddLifeItemModal = ({ onClose, onAdd }: Props) => {
@@ -15,7 +15,7 @@ const AddLifeItemModal = ({ onClose, onAdd }: Props) => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!name || !cost) return;
-    onAdd({ name, cost: Number(cost), icon });
+    onAdd({ name, originalPrice: Number(cost), icon });
     onClose();
   };
 

@@ -8,10 +8,20 @@ type AuthInputProps = {
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 };
 
-const AuthInput = ({ label, name, type, placeholder, value, autoComplete, onChange }: AuthInputProps) => {
+const AuthInput = ({
+  label,
+  name,
+  type,
+  placeholder,
+  value,
+  autoComplete,
+  onChange,
+}: AuthInputProps) => {
   return (
     <div className="flex flex-col gap-1">
-      <label className="text-xs font-bold tracking-widest uppercase text-muted">{label}</label>
+      <label className="text-xs font-bold tracking-widest uppercase text-muted">
+        {label}
+      </label>
       <input
         name={name}
         type={type}

@@ -4,6 +4,7 @@ import { AuthContext } from "../context/AuthContext";
 
 const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
   const auth = useContext(AuthContext);
+  if (auth?.loading) return null;
   if (!auth?.user) return <Navigate to="/login" replace />;
   return <>{children}</>;
 };

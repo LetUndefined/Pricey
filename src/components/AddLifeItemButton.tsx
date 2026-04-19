@@ -2,29 +2,22 @@ import { Plus } from "lucide-react";
 import { useContext, useState } from "react";
 import AddLifeItemModal from "./AddLifeItemModal";
 import { LifeItemContext } from "../context/LifeItemContext";
-import type { LifeItem } from "../interface";
 import { RealCostContext } from "../context/RealCostContext";
+import type { LifeItem } from "../interface";
 
 const AddLifeItemButton = () => {
   const [open, setOpen] = useState(false);
   const context = useContext(LifeItemContext);
   const realCost = useContext(RealCostContext);
   if (!context || !realCost) return null;
-  const { userItems, setUserItems } = context;
-  const { value } = realCost;
+  const { addUserItem } = context;
 
   const handleAdd = (item: LifeItem) => {
-    const timesCanBuy = value.calculatedCost / item.cost;
-    setUserItems([
-      ...userItems,
-      {
-        name: item.name,
-        cost: timesCanBuy,
-        originalPrice: item.cost,
-        unit: "x" as const,
-        icon: item.icon,
-      },
-    ]);
+    addUserItem({
+      name: item.name,
+      originalPrice: item.originalPrice,
+      icon: item.icon,
+    });
   };
 
   return (

@@ -1,15 +1,33 @@
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import { User, LogOut, ChevronRight } from "lucide-react";
 import { AuthContext } from "../context/AuthContext";
+import EditValueModal from "../components/EditValueModal";
+import { fetchProfile } from "../hooks/supabase.api";
+import { RealCostContext } from "../context/RealCostContext";
+
+type Modal = "monthly" | "hourly" | null;
 
 const Profile = () => {
   const auth = useContext(AuthContext);
   const navigate = useNavigate();
+  const [modal, setModal] = useState<Modal>(null);
+  const context = useContext(RealCostContext);
+
+  useEffect(() => {
+    async function fetchData() {
+      const response = await fetchProfile();
+      if (response) context?.setValue((prev) => ({ ...prev, monthly: response.monthly, hourly: response.hourly }));
+    }
+    fetchData();
+  }, [context]);
+
+  if (!context) return null;
+
+  const { value, setValue } = context;
 
   return (
     <div className="flex flex-col gap-6 py-4">
-      {/* Avatar + name */}
       <div className="flex flex-col items-center gap-3 py-4">
         <div className="w-20 h-20 rounded-full bg-dark flex items-center justify-center">
           <User size={36} className="text-white" />
@@ -20,47 +38,26 @@ const Profile = () => {
         </div>
       </div>
 
-      {/* Salary section */}
       <div>
-        <p className="text-xs tracking-widest uppercase font-bold text-muted mb-2 px-1">
-          Salary
-        </p>
+        <p className="text-xs tracking-widest uppercase font-bold text-muted mb-2 px-1">Salary</p>
         <div className="bg-card border border-border rounded-xl overflow-hidden">
-          <button className="w-full flex items-center justify-between px-4 py-4 border-b border-border">
+          <button onClick={() => setModal("monthly")} className="w-full flex items-center justify-between px-4 py-4 border-b border-border">
             <span className="font-bold text-dark">Monthly salary</span>
             <div className="flex items-center gap-2">
-              <span className="text-muted font-bold">€0</span>
+              <span className="text-muted font-bold">€{value?.monthly}</span>
               <ChevronRight size={16} className="text-subtle" />
             </div>
           </button>
-          <button className="w-full flex items-center justify-between px-4 py-4">
+          <button onClick={() => setModal("hourly")} className="w-full flex items-center justify-between px-4 py-4">
             <span className="font-bold text-dark">Hourly rate</span>
             <div className="flex items-center gap-2">
-              <span className="text-muted font-bold">€0</span>
+              <span className="text-muted font-bold">€{value?.hourly}</span>
               <ChevronRight size={16} className="text-subtle" />
             </div>
           </button>
         </div>
       </div>
 
-      {/* Account section */}
-      <div>
-        <p className="text-xs tracking-widest uppercase font-bold text-muted mb-2 px-1">
-          Account
-        </p>
-        <div className="bg-card border border-border rounded-xl overflow-hidden">
-          <button className="w-full flex items-center justify-between px-4 py-4 border-b border-border">
-            <span className="font-bold text-dark">Change password</span>
-            <ChevronRight size={16} className="text-subtle" />
-          </button>
-          <button className="w-full flex items-center justify-between px-4 py-4">
-            <span className="font-bold text-dark">Edit name</span>
-            <ChevronRight size={16} className="text-subtle" />
-          </button>
-        </div>
-      </div>
-
-      {/* Logout */}
       <button
         onClick={async () => {
           await auth?.signOut();
@@ -71,6 +68,9 @@ const Profile = () => {
         <LogOut size={18} />
         Log out
       </button>
+
+      {modal === "monthly" && <EditValueModal label="monthly" field={modal} value={value} setValue={setValue} onClose={() => setModal(null)} />}
+      {modal === "hourly" && <EditValueModal label="hourly" field={modal} value={value} setValue={setValue} onClose={() => setModal(null)} />}
     </div>
   );
 };

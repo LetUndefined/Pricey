@@ -1,6 +1,7 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { LifeItemContext } from "./LifeItemContext";
 import { RealCostContext } from "./RealCostContext";
+import { fetchLifeItems, insertLifeItem } from "../hooks/supabase.api";
 import type { ItemUnit } from "../interface";
 
 export const LifeItemProvider = ({
@@ -21,6 +22,44 @@ export const LifeItemProvider = ({
       icon: string;
     }[]
   >([]);
+
+  useEffect(() => {
+    fetchLifeItems().then((data) => {
+      setUserItems(
+        data.map((item) => ({
+          id: item.id,
+          name: item.name,
+          originalPrice: item.original_price,
+          cost: 0,
+          unit: "x" as const,
+          icon: item.icon,
+        })),
+      );
+    });
+  }, []);
+
+  const addUserItem = async (item: {
+    name: string;
+    originalPrice: number;
+    icon: string;
+  }) => {
+    const id = await insertLifeItem({
+      name: item.name,
+      originalPrice: item.originalPrice,
+      icon: item.icon,
+    });
+    setUserItems((prev) => [
+      ...prev,
+      {
+        id: id ?? undefined,
+        name: item.name,
+        originalPrice: item.originalPrice,
+        cost: 0,
+        unit: "x",
+        icon: item.icon,
+      },
+    ]);
+  };
 
   const lifeItem: {
     name: string;
@@ -55,7 +94,7 @@ export const LifeItemProvider = ({
   ];
 
   return (
-    <LifeItemContext value={{ lifeItem, userItems, setUserItems }}>
+    <LifeItemContext value={{ lifeItem, addUserItem, userItems }}>
       {children}
     </LifeItemContext>
   );
