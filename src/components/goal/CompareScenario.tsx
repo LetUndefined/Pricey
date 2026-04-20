@@ -12,8 +12,8 @@ const CompareScenario = ({ goal, percentage }: Props) => {
   if (!context) return null;
   const { value } = context;
 
-  const monthly = savingsMonthlyAmount(goal, percentage);
-  const years = savingsYearsToGoal(goal, percentage);
+  const monthly = savingsMonthlyAmount(value.monthly, percentage);
+  const years = savingsYearsToGoal(goal, monthly);
   const hours = savingsHoursOfWork(monthly, value.hourly);
   const paycheck = paycheckToGoal(goal, monthly);
 
@@ -32,12 +32,12 @@ const CompareScenario = ({ goal, percentage }: Props) => {
       </div>
       <div>
         <div className="relative h-2 w-full bg-border rounded-full overflow-hidden">
-          <div className="absolute left-0 top-0 h-full bg-accent rounded-full" style={{ width: `${percentage * 2}%` }} />
+          <div className="absolute left-0 top-0 h-full bg-accent/20 rounded-full" style={{ width: `${percentage * 2}%` }} />
         </div>
       </div>
       <div className="flex gap-2 text-sm text-muted font-semibold ml-1 tracking-wide ">
         <span className="border border-border rounded-lg px-2 bg-bg">{hours.toFixed(0)} hrs/mo</span>
-        <span className="border border-border rounded-lg px-2 bg-bg">{paycheck ? paycheck.toFixed(1) : 0} paychecks</span>
+        <span className="border border-border rounded-lg px-2 bg-bg">{paycheck >= 1 ? paycheck.toFixed(0) + " paychecks" : "less than 1 paycheck"} </span>
       </div>
     </div>
   );

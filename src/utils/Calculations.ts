@@ -27,5 +27,5 @@ export const savingsYearsToGoal = (goal: number, monthlyAmount: number) => {
 };
 
 export const paycheckToGoal = (goal: number, monthly: number) => {
-  return monthly / goal
-}
+  return goal / monthly;
+};

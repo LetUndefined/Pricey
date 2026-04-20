@@ -1,7 +1,6 @@
 import { useState } from "react";
 import GoalSetter from "../components/goal/GoalSetter";
 import SavingSlider from "../components/goal/SavingSlider";
-
 import CompareScenario from "../components/goal/CompareScenario";
 
 const Compare = () => {
@@ -15,9 +14,9 @@ const Compare = () => {
       <div>
         <h2 className="text-md tracking-widest uppercase font-bold text-muted">Compare Scenarios</h2>
       </div>
-      {scenarios.map((pct) => {
-        return <CompareScenario goal={goal} percentage={pct} key={pct} />;
-      })}
+      {scenarios.map((pct) => (
+        <CompareScenario goal={goal} percentage={pct} key={pct} />
+      ))}
     </div>
   );
 };
