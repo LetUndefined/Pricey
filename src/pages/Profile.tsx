@@ -18,9 +18,10 @@ const Profile = () => {
     async function fetchData() {
       const response = await fetchProfile();
       if (response) context?.setValue((prev) => ({ ...prev, monthly: response.monthly, hourly: response.hourly }));
+      console.log("fetching");
     }
     fetchData();
-  }, [context]);
+  }, []);
 
   if (!context) return null;
 

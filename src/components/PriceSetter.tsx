@@ -46,7 +46,7 @@ const PriceSetter = () => {
         </div>
       </div>
       <div>
-        <button onClick={() => handleSubmit()} className="bg-accent text-white text-xl px-4 py-2 rounded-lg font-extrabold">
+        <button onClick={() => handleSubmit()} className="bg-accent text-white text-xl px-4 py-2 rounded-lg font-extrabold shadow-lg shadow-accent/50">
           Calculate
         </button>
       </div>
