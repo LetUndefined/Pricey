@@ -21,6 +21,7 @@ const Investing = () => {
       {INVEST_SCENARIOS.map((e) => {
         return <InvestOptions name={e.name} rate={e.rate} risk={e.risk} variant={e.variant} investment={investment} years={isActive} key={e.name} />;
       })}
+      <span className="flex text-xs text-muted text-center">Returns are historical averages. Past performance does not guarantee future results.</span>
     </div>
   );
 };
