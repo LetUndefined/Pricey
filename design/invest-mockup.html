@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Costly — Invest Tab Mockup</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,700&display=swap" rel="stylesheet"/>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Inter', system-ui, sans-serif; background: #E8E4DC; padding: 60px 40px; }
+
+    :root {
+      --bg: #F5F2EB; --card: #FFFFFF; --border: #E8E4DC;
+      --text: #1A1A1A; --muted: #999; --subtle: #CCC;
+      --accent: #FF4D2E; --green: #16A34A; --dark: #1A1A1A;
+    }
+
+    .phone-wrap { display: flex; flex-direction: column; align-items: center; gap: 10px; }
+    .phone {
+      width: 300px; background: var(--bg);
+      border-radius: 44px; border: 2px solid #CCC9C0;
+      box-shadow: 0 32px 64px rgba(0,0,0,0.14), 0 4px 12px rgba(0,0,0,0.06);
+      overflow: hidden;
+    }
+    .notch {
+      width: 88px; height: 22px; background: var(--bg);
+      border-radius: 0 0 14px 14px; margin: 0 auto;
+      border: 2px solid #CCC9C0; border-top: none;
+    }
+    .screen { background: var(--bg); min-height: 640px; position: relative; }
+
+    /* NAV */
+    .nav { display: flex; justify-content: space-between; align-items: center; padding: 14px 20px 10px; }
+    .logo { font-size: 0.95rem; font-weight: 900; color: var(--text); letter-spacing: -0.5px; }
+    .logo-accent { color: var(--accent); }
+    .nav-avatar { width: 28px; height: 28px; border-radius: 50%; background: var(--text); }
+
+    /* BOTTOM NAV */
+    .bnav {
+      position: absolute; bottom: 0; left: 0; right: 0;
+      background: var(--card); border-top: 1px solid var(--border);
+      display: flex; justify-content: space-around; padding: 10px 0 18px;
+    }
+    .bnav-item { display: flex; flex-direction: column; align-items: center; gap: 4px; }
+    .bnav-label { font-size: 0.58rem; font-weight: 600; color: var(--subtle); }
+    .bnav-item.active .bnav-label { color: var(--accent); }
+    .bnav-icon { font-size: 1rem; }
+    .bnav-item.active .bnav-icon { filter: none; }
+
+    /* PAGE */
+    .page-content { padding: 0 16px; padding-bottom: 90px; }
+
+    /* HERO INPUT */
+    .invest-hero {
+      background: var(--dark); border-radius: 20px;
+      padding: 18px; margin-bottom: 14px;
+    }
+    .hero-eyebrow {
+      font-size: 0.6rem; font-weight: 700; letter-spacing: 1.5px;
+      text-transform: uppercase; color: #555; margin-bottom: 5px;
+    }
+    .hero-headline {
+      font-size: 1.1rem; font-weight: 900; color: #fff;
+      line-height: 1.25; letter-spacing: -0.5px; margin-bottom: 14px;
+    }
+    .hero-headline em { font-style: italic; color: var(--accent); }
+
+    .amount-input {
+      background: #2A2A2A; border-radius: 10px; padding: 10px 12px;
+      display: flex; align-items: center; gap: 6px;
+    }
+    .currency { font-size: 1.2rem; font-weight: 900; color: #fff; }
+    .amount-val { font-size: 1.8rem; font-weight: 900; color: #fff; letter-spacing: -1px; line-height: 1; }
+
+    /* TIMEFRAME PILLS */
+    .section-label {
+      font-size: 0.58rem; font-weight: 700; letter-spacing: 1.5px;
+      text-transform: uppercase; color: var(--muted); margin-bottom: 8px;
+    }
+    .pills { display: flex; gap: 6px; margin-bottom: 14px; }
+    .pill {
+      flex: 1; text-align: center; padding: 6px 0;
+      border-radius: 999px; font-size: 0.65rem; font-weight: 700;
+      background: var(--card); border: 1.5px solid var(--border); color: var(--muted);
+    }
+    .pill.active { background: var(--text); border-color: var(--text); color: #fff; }
+
+    /* SCENARIO CARDS */
+    .scenarios { display: flex; flex-direction: column; gap: 8px; margin-bottom: 14px; }
+
+    .scenario-card {
+      background: var(--card); border-radius: 14px;
+      border: 1.5px solid var(--border); padding: 13px 14px;
+    }
+
+    .scenario-card.winner { border-color: var(--green); border-width: 2px; }
+
+    .sc-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px; }
+    .sc-left { }
+    .sc-name { font-size: 0.83rem; font-weight: 800; color: var(--text); }
+    .sc-rate { font-size: 0.65rem; color: var(--muted); margin-top: 1px; }
+    .sc-badge {
+      font-size: 0.58rem; font-weight: 700; padding: 3px 8px;
+      border-radius: 6px; background: #F0FDF4; color: var(--green);
+    }
+    .sc-badge.hot { background: #FFF0EE; color: var(--accent); }
+    .sc-badge.safe { background: #F5F2EB; color: var(--muted); }
+
+    .sc-result { display: flex; align-items: baseline; gap: 4px; }
+    .sc-value { font-size: 1.5rem; font-weight: 900; color: var(--text); letter-spacing: -1px; line-height: 1; }
+    .sc-value.green { color: var(--green); }
+    .sc-gain {
+      font-size: 0.65rem; font-weight: 700;
+      color: var(--green); background: #F0FDF4;
+      padding: 2px 6px; border-radius: 6px; margin-left: 4px;
+    }
+
+    .sc-bar { height: 3px; background: #F0EDE6; border-radius: 2px; margin-top: 10px; }
+    .sc-bar-fill { height: 100%; border-radius: 2px; }
+
+    /* DISCLAIMER */
+    .disclaimer {
+      font-size: 0.58rem; color: var(--subtle); text-align: center;
+      padding: 0 8px; line-height: 1.5;
+    }
+  </style>
+</head>
+<body>
+
+<div class="phone-wrap">
+  <div class="phone">
+    <div class="notch"></div>
+    <div class="screen">
+
+      <div class="nav">
+        <span class="logo">Cost<span class="logo-accent">ly</span></span>
+        <div class="nav-avatar"></div>
+      </div>
+
+      <div class="page-content">
+
+        <!-- Hero input -->
+        <div class="invest-hero">
+          <div class="hero-eyebrow">What if you invested it?</div>
+          <div class="hero-headline">Turn spending into <em>future wealth.</em></div>
+          <div class="amount-input">
+            <span class="currency">€</span>
+            <span class="amount-val">320</span>
+          </div>
+        </div>
+
+        <!-- Timeframe -->
+        <div class="section-label">Timeframe</div>
+        <div class="pills">
+          <div class="pill">5y</div>
+          <div class="pill">10y</div>
+          <div class="pill active">20y</div>
+          <div class="pill">30y</div>
+        </div>
+
+        <!-- Scenarios -->
+        <div class="section-label">If invested in</div>
+        <div class="scenarios">
+
+          <div class="scenario-card winner">
+            <div class="sc-top">
+              <div class="sc-left">
+                <div class="sc-name">NASDAQ-100</div>
+                <div class="sc-rate">~14.5% avg annual return</div>
+              </div>
+              <span class="sc-badge hot">High risk</span>
+            </div>
+            <div class="sc-result">
+              <span class="sc-value green">€4,318</span>
+              <span class="sc-gain">+€3,998</span>
+            </div>
+            <div class="sc-bar"><div class="sc-bar-fill" style="width:100%; background:#16A34A;"></div></div>
+          </div>
+
+          <div class="scenario-card">
+            <div class="sc-top">
+              <div class="sc-left">
+                <div class="sc-name">S&P 500</div>
+                <div class="sc-rate">~10.5% avg annual return</div>
+              </div>
+              <span class="sc-badge">Moderate</span>
+            </div>
+            <div class="sc-result">
+              <span class="sc-value">€2,278</span>
+              <span class="sc-gain">+€1,958</span>
+            </div>
+            <div class="sc-bar"><div class="sc-bar-fill" style="width:75%; background:#16A34A;"></div></div>
+          </div>
+
+          <div class="scenario-card">
+            <div class="sc-top">
+              <div class="sc-left">
+                <div class="sc-name">World ETF</div>
+                <div class="sc-rate">~8% avg annual return</div>
+              </div>
+              <span class="sc-badge">Moderate</span>
+            </div>
+            <div class="sc-result">
+              <span class="sc-value">€1,491</span>
+              <span class="sc-gain">+€1,171</span>
+            </div>
+            <div class="sc-bar"><div class="sc-bar-fill" style="width:55%; background:#16A34A;"></div></div>
+          </div>
+
+          <div class="scenario-card">
+            <div class="sc-top">
+              <div class="sc-left">
+                <div class="sc-name">Gov. Bonds</div>
+                <div class="sc-rate">~3% avg annual return</div>
+              </div>
+              <span class="sc-badge safe">Low risk</span>
+            </div>
+            <div class="sc-result">
+              <span class="sc-value">€577</span>
+              <span class="sc-gain">+€257</span>
+            </div>
+            <div class="sc-bar"><div class="sc-bar-fill" style="width:25%; background:#999;"></div></div>
+          </div>
+
+        </div>
+
+        <p class="disclaimer">Returns are historical averages. Past performance does not guarantee future results.</p>
+
+      </div>
+
+      <div class="bnav">
+        <div class="bnav-item"><span class="bnav-icon">🏠</span><span class="bnav-label">Home</span></div>
+        <div class="bnav-item"><span class="bnav-icon">♥</span><span class="bnav-label">My Life</span></div>
+        <div class="bnav-item"><span class="bnav-icon">⇄</span><span class="bnav-label">Compare</span></div>
+        <div class="bnav-item active"><span class="bnav-icon">📈</span><span class="bnav-label">Invest</span></div>
+      </div>
+
+    </div>
+  </div>
+  <span style="font-size:0.62rem;color:#999;font-weight:600;">Invest Tab</span>
+</div>
+
+</body>
+</html>
