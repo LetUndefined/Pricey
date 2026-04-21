@@ -33,7 +33,7 @@ export const investMonthlyToReachGoal = (goal: number, rate: number, years: numb
   return (goal * monthlyRate) / (Math.pow(1 + monthlyRate, months) - 1);
 };
 
-export const investBreakEvenYears = (cost: number, rate: number) => {
+export const investBreakEvenYears = (rate: number) => {
   return Math.log(2) / Math.log(1 + rate / 100);
 };
 
