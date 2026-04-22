@@ -6,7 +6,6 @@ import { RouterProvider } from "react-router";
 import Home from "./pages/Home";
 import MyLife from "./pages/MyLife";
 import Compare from "./pages/Goal";
-import History from "./pages/Investing";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import Layout from "./layout/Layout";
