@@ -5,7 +5,7 @@ const navItems = [
   { to: "/", icon: Home, label: "Home" },
   { to: "/mylife", icon: Heart, label: "My Life" },
   { to: "/compare", icon: Target, label: "Goal" },
-  { to: "/history", icon: Clock, label: "History" },
+  { to: "/invest", icon: Clock, label: "Invest" },
 ];
 
 const Navigation = () => {
@@ -14,12 +14,7 @@ const Navigation = () => {
       <ul className="flex justify-around h-16 items-center">
         {navItems.map(({ to, icon: Icon, label }) => (
           <li key={to}>
-            <NavLink
-              to={to}
-              className={({ isActive }) =>
-                `flex flex-col items-center gap-1 ${isActive ? "text-accent" : "text-subtle"}`
-              }
-            >
+            <NavLink to={to} className={({ isActive }) => `flex flex-col items-center gap-1 ${isActive ? "text-accent" : "text-subtle"}`}>
               <Icon size={20} />
               <span className="text-xs">{label}</span>
             </NavLink>
